@@ -27,4 +27,5 @@ class Helper():
                     "went wrong..."
             Event(message=message, is_error=True, exit=True)
         Event("Done!", is_success=True)
+        return response.content.split("\n")
 
