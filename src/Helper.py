@@ -5,10 +5,8 @@ import os
 
 class Helper():
 
-    def __init__(self):
-        self.print_header()
-
-    def print_header(self) -> None:
+    @staticmethod
+    def print_header(day) -> None:
         print("")
         print(r"     _       _                 _         __ _  __     _    ")
         print(r"    / \   __| |_   _____ _ __ | |_ ___  / _| |/ /___ | |_  ")
@@ -16,16 +14,19 @@ class Helper():
         print(r"  / ___ \ (_| |\ V /  __/ | | | || (_) |  _| . \ (_) | |   ")
         print(r" /_/   \_\__,_| \_/ \___|_| |_|\__\___/|_| |_|\_\___/ \__| ")
         print("")
+        print(" --> Challenge day: " + day)
+        print("")
 
     @staticmethod
-    def retrieve_challenge_input(uri) -> list:
+    def retrieve_challenge_input(url, login_cookie) -> list:
         Event("Retrieving the challenge input...")
+        cookie = {"session": login_cookie}
         try:
-            response = requests.get(uri)
+            response = requests.get(url, cookies=cookie)
         except Exception as e:
             message = "Getting the challenge input from " + url + \
-                    "went wrong..."
+                    "went wrong. Error message: " + str(e)
             Event(message=message, is_error=True, exit=True)
         Event("Done!", is_success=True)
-        return response.content.split("\n")
+        return response.content.decode("utf-8").split("\n")
 
