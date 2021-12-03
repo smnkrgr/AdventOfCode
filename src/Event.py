@@ -16,20 +16,16 @@ class bcolors:
 class Event(object):
 
     def __init__(self, message, is_error=False, exit=False, 
-                 is_success=False, logger=None, level=0):
+                 is_success=False, level=0):
         # Assign event attributes
         self.message = message
         self.is_error = is_error
         self.is_success = is_success
         self.exit = exit
-        self.logger = logger
         self.level = level
 
         # Format message
         self.message = self.format_message()
-
-        # Handle logger
-        # TODO
         print(self.message)
 
         # Exit program if required
