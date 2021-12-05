@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # Add vim swp files 
-.swp
+*.swp
