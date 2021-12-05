@@ -1,12 +1,13 @@
 from src.Event import Event
 import requests
 import os
+import sys
 
 
 class Helper():
 
     @staticmethod
-    def print_header(day) -> None:
+    def print_header() -> None:
         print("")
         print(r"     _       _                 _         __ _  __     _    ")
         print(r"    / \   __| |_   _____ _ __ | |_ ___  / _| |/ /___ | |_  ")
@@ -14,11 +15,9 @@ class Helper():
         print(r"  / ___ \ (_| |\ V /  __/ | | | || (_) |  _| . \ (_) | |   ")
         print(r" /_/   \_\__,_| \_/ \___|_| |_|\__\___/|_| |_|\_\___/ \__| ")
         print("")
-        print(" --> Challenge day: " + day)
-        print("")
 
     @staticmethod
-    def retrieve_challenge_input(url, login_cookie) -> list:
+    def retrieve_challenge_input(url, login_cookie=sys.argv[1]) -> list:
         Event("Retrieving the challenge input...")
         cookie = {"session": login_cookie}
         try:
@@ -30,3 +29,6 @@ class Helper():
         Event("Done!", is_success=True)
         return response.content.decode("utf-8").split("\n")
 
+
+# Print header upon import
+Helper.print_header()
